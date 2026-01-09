@@ -1,2 +1,65 @@
 # heatmap_metabolities
 Categorical heatmaps for metabolomics data integrating direction of change and statistical significance relative to a control.
+Overview
+
+This repository provides a reproducible Python workflow to generate categorical heatmaps of metabolomic data, integrating direction of change relative to a control and statistical significance into a single visualization.
+The pipeline is designed for plant metabolomics experiments with multiple treatments and biological replicates, and is fully compatible with data organized in tidy (long) format.
+
+Key Features
+- Uses tidy metabolomics data (Metabolite, Treatment, Replicate, Value)
+- Computes mean abundance per treatment
+- Integrates pairwise statistical significance vs control
+
+Produces diverging categorical heatmaps:
+🔴 Treatment significantly higher than control
+🟢 Treatment significantly lower than control
+⚪ Not significant
+Overlays **asterisks (*, **, ***, **) directly on the heatmap
+Fully customizable (control column visible or hidden)
+
+Input Files
+1. Metabolomics data (tidy format)
+metabolomics_example_A-I_tidy.csv
+
+Required columns:
+- Metabolite
+- Treatment (e.g. A, B, C, …)
+- Replicate
+- Value
+Each row represents one biological replicate of one metabolite in one treatment.
+
+2. Statistical significance file
+metaboliti_NT_sigonly.csv
+
+Expected structure:
+- Metabolite
+- sig_B_vs_A, sig_C_vs_A, …
+(asterisks indicating significance vs control)
+- The control treatment is A.
+- Heatmap Logic
+
+For each metabolite and treatment:
+- Mean abundance is calculated from replicates
+- Difference vs control (A) is evaluated
+- Color encoding:
+  Red → Treatment > Control (significant)
+  Green → Treatment < Control (significant)
+  White → Not significant
+
+Statistical significance is shown as asterisks overlaid on cells
+
+Output
+- Publication-ready categorical heatmap
+- Optional hierarchical clustering on metabolites
+- Fully interpretable visual summary of:
+- Direction of metabolic change
+- Statistical relevance
+
+Typical Use Cases
+- Metabolomics under stress conditions
+- Treatment vs control comparisons
+- Space biology / plant stress physiology
+
+Supplementary figures for publications
+
+Exploratory data analysis
